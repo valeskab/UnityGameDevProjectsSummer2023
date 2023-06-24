@@ -5,13 +5,11 @@ using UnityEngine.InputSystem;
 
 public class BallHandlerBehaviour : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private Camera mainCamera;
     void Start()
     {
-        
+        mainCamera = Camera.main;
     }
-
-    // Update is called once per frame
     void Update()
     {
         if (!Touchscreen.current.primaryTouch.press.isPressed)
@@ -21,6 +19,8 @@ public class BallHandlerBehaviour : MonoBehaviour
         
         Vector2 touchPosition =Touchscreen.current.primaryTouch.position.ReadValue();
 
-        Debug.Log(touchPosition);
+        Vector3 worldPosition = mainCamera.ScreenToWorldPoint(touchPosition);
+
+        Debug.Log(worldPosition);
     }
 }
