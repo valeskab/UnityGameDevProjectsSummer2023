@@ -7,17 +7,29 @@ public class BallHandlerBehaviour : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D currentBallRigidBody;
     private Camera mainCamera;
+    private bool isDragging;
     void Start()
     {
         mainCamera = Camera.main;
     }
     void Update()
     {
+        if (currentBallRigidBody == null) {return;}
+        {
+            
+        }
         if (!Touchscreen.current.primaryTouch.press.isPressed)
         {
-            currentBallRigidBody.isKinematic = false;
+            if (isDragging)
+            {
+                LaunchBall();
+            }
+            
+            isDragging = false;
             return;
         }
+
+        isDragging = true;
         
         currentBallRigidBody.isKinematic = true;
         
@@ -27,5 +39,11 @@ public class BallHandlerBehaviour : MonoBehaviour
 
         currentBallRigidBody.position = worldPosition;
         
+    }
+
+    private void LaunchBall()
+    {
+        currentBallRigidBody.isKinematic = false;
+        currentBallRigidBody = null;
     }
 }
