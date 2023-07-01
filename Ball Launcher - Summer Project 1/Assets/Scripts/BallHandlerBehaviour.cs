@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 public class BallHandlerBehaviour : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D currentBallRigidBody;
+    [SerializeField] private SpringJoint2D currentBallSpringJoint;
+    
     private Camera mainCamera;
     private bool isDragging;
     void Start()
@@ -45,5 +47,8 @@ public class BallHandlerBehaviour : MonoBehaviour
     {
         currentBallRigidBody.isKinematic = false;
         currentBallRigidBody = null;
+
+        currentBallSpringJoint.enabled = false;
+        currentBallSpringJoint = null;
     }
 }
