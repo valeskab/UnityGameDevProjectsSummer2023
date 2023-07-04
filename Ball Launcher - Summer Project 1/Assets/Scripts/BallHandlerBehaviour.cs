@@ -7,6 +7,7 @@ public class BallHandlerBehaviour : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D currentBallRigidBody;
     [SerializeField] private SpringJoint2D currentBallSpringJoint;
+    [SerializeField] private float detachDelay;
     
     private Camera mainCamera;
     private bool isDragging;
@@ -47,7 +48,12 @@ public class BallHandlerBehaviour : MonoBehaviour
     {
         currentBallRigidBody.isKinematic = false;
         currentBallRigidBody = null;
-
+        
+        Invoke(nameof(DetachBall), detachDelay);
+    }
+    
+    private void DetachBall()
+    {
         currentBallSpringJoint.enabled = false;
         currentBallSpringJoint = null;
     }
