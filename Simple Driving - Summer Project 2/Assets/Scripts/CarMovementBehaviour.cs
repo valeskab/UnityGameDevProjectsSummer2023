@@ -10,6 +10,7 @@ public class CarMovementBehaviour : MonoBehaviour
     void Update()
     {
         speed += speedGainPerSecond * Time.deltaTime;
+        transform.Rotate(0f, 1f * Time.deltaTime, 0f);
         transform.Translate(Vector3.forward * 10 * Time.deltaTime);
     }
 }
