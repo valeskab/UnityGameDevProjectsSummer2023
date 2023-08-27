@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CarMovementBehaviour : MonoBehaviour
 {
@@ -15,6 +17,14 @@ public class CarMovementBehaviour : MonoBehaviour
         speed += speedGainPerSecond * Time.deltaTime;
         transform.Rotate(0f, steerValue * turnSpeed * Time.deltaTime, 0f);
         transform.Translate(Vector3.forward * 10 * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Obstacle"))
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     public void Steer(int value)
